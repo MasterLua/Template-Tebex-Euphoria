@@ -1,0 +1,36 @@
+<div class="panel panel-default module">
+    <div class="panel-heading">
+        <div class="mdi-badge"><i class="mdi mdi-coin"></i></div><span>{{ module.header }}</span></div>
+    <div class="panel-body">
+      <ul class="payments">
+        {% for payment in module.payments %}
+            <li>
+              <div class="avatar">
+                <img src="{{ payment.skin }}" width="28" />
+              </div>
+              <div class="info">
+                <div class="ign">
+                    {{ payment.ign }}
+                    {% if module.displayTime %}
+                        &bull; {{ payment.time }}
+                    {% endif %}
+                </div>
+                <div class="extra">
+                    {% if module.displayPackage %}
+                        {{ payment.name[:20] }}
+                    {% endif %}
+                    {% if module.displayPackage and module.displayPrice %}
+                        &bull;
+                    {% endif %}
+                    {% if module.displayPrice %}
+                        {{ payment.price|money }} <small>{{ payment.currency }}</small>
+                    {% endif %}
+                </div>
+              </div>
+            </li>
+        {% else %}
+            {{ __("No recent payments to display.") }}
+        {% endfor %}
+      </ul>
+    </div>
+</div>

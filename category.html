@@ -1,0 +1,97 @@
+{% extends "layout.html" %}
+
+{% block content %}
+	<div class="body">
+		<div class="content">
+			{% if category.description != "" %}
+				<div class="panel panel-default">
+					<div class="panel-heading">{{ category.name }}    
+					<div class="cart"><a href="/checkout/basket"><i class="fas fa-shopping-basket"></i> Cart</a> </div></div>
+					<div class="panel-body">
+						{{ category.description|raw }}
+					</div>
+				</div>
+			{% endif %}
+			<div class="panel panel-default">
+				{% if category.description == "" %}
+					<div class="panel-heading">{{ category.name }}
+					<div class="cart"><a href="/checkout/basket"><i class="fas fa-shopping-basket"></i> Cart</a></div>
+					</div>
+				{% endif %}
+				<div class="panel-body">
+					{% if category.packages|length > 0 %}
+					    <div class="category">
+    						{% if category.displayType == "list" %}
+                                <div class="packages-row">
+                                    <table class="table table-hover table-striped">
+    							        <tbody>
+        									{% for package in category.packages %}
+        									    <tr>
+                                                  <td class="name">{{ package.name }} {% if package.countdownEnds %}<span class="text-danger">&nbsp;&nbsp;<i class="fa fa-clock-o"></i> <span class="countdown-to" data-countdown="{{ package.countdownEnds }}">{{ __("Ending Soon!") }}</span></span>{% endif %}</td>
+                                                  <td class="price">
+                                                    {% if package.customPrice == false and package.price > 0 %}
+        						                        {% if package.discount.applied %}
+        						                  		    <span class="discount">{{ package.discount.original|money }}</span>
+        						                  		{% endif %}
+        												{{ package.price|money }} <small>{{ basket.currency }}</small>
+        											{% endif %}
+                                                  </td>
+                                                  <td class="button">
+                                                    {% if package.basket %}
+        					                  			<a href="/checkout/packages/remove/{{ package.id }}" class="btn btn-sm btn-danger btn-block">{{ __("Remove") }}</a>
+        					                  		{% else %}
+        											    <a href="javascript::void(0);" data-remote="/package/{{ package.id }}" class="btn btn-sm btn-info btn-block toggle-modal">{{ __("Buy") }}</a>
+        											{% endif %}
+                                                  </td>
+                                                </tr>
+        									{% endfor %}
+    							        </tbody>
+    						        </table>
+    						    </div>
+    						{% else %}
+    						    <div class="packages-image">
+        							{% for package in category.packages %}
+        							    <div class="package">
+                                            <div class="image">
+                                                <a href="javascript:void(0);" data-remote="/package/{{ package.id }}" class="toggle-modal">
+                                                    <img src="{{ package.image.url }}" class="toggle-tooltip {% if package.image.borderless %}img-rounded{% else %}img-thumbnail{% endif %}" title="{{ __("Click for more details") }}" />
+                                                </a>
+                                            </div>
+                                            <div class="info">
+                                              <div class="text">
+                                                <div class="name">{{ package.name[:20] }}
+                                                   {% if package.countdownEnds %}<br /><span class="text-danger"><i class="fa fa-clock-o"></i> <span class="countdown-to" data-countdown="{{ package.countdownEnds }}">{{ __("Ending Soon!") }}</span></span>{% endif %}
+                                                </div>
+                                                <div class="price">
+                                                    {% if package.customPrice == false and package.price > 0.00 %}
+        												{% if package.discount.applied %}
+        				                  					<span class="discount">{{ package.discount.original|money }}</span>
+        				                  				{% endif %}
+        												{{ package.price|money }} <small>{{ basket.currency }}</small>
+        											{% endif %}
+        										</div>
+                                              </div>
+                                              <div class="button">
+                                                {% if package.basket %}
+        		                  					<a href="/checkout/packages/remove/{{ package.id }}" class="btn btn-sm btn-danger btn-block">{{ __("Remove") }}</a>
+        		                  				{% else %}
+        											<a href="javascript::void(0);" data-remote="/package/{{ package.id }}" class="btn btn-sm btn-info btn-block toggle-modal">{{ __("Buy") }}</a>
+        										{% endif %}
+                                              </div>
+                                            </div>
+                                        </div>
+        							{% endfor %}
+        						</div>
+    						{% endif %}
+    					</div>
+					{% else %}
+						{{ __("No packages to display in this category.") }}
+					{% endif %}
+				</div>
+			</div>
+		</div>
+		<div class="sidebar">
+			{{ modules|raw }}
+		</div>
+	</div>
+{% endblock %}

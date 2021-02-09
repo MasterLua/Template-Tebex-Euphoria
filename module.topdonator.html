@@ -1,0 +1,37 @@
+<div class="panel panel-default module">
+    <div class="panel-heading">
+        <div class="mdi-badge"><i class="mdi mdi-medal"></i></div><span>{{ module.header }}</span></div>
+    <div class="panel-body">
+        {% if module.donor %}
+          <div class="top-donator">
+              <div class="avatar">
+                <img src="{{ module.skin }}" width="40">
+              </div>
+              <div class="info">
+                <div class="ign">{{ module.ign }}</div>
+                <div class="amount">
+                    {% if module.displayAmount %}
+                        {{ __("Donated") }} {{ module.total|money }} <small>{{ store.currency }}</small>
+                    {% else %}
+                        {{ __("Donated the most ") }}
+                    {% endif %}
+                    
+                    {% if module.period == "hourly" %}
+                        {{ __("this hour.") }}
+                    {% elseif module.period == "daily" %}
+                        {{ __("today.") }}
+                    {% elseif module.period == "monthly" %}
+                        {{ __("this month.") }}
+                    {% elseif module.period == "yearly" %}
+                       {{ __("this year.") }}
+                    {% else %}
+                        {{ __("this week.") }}
+                    {% endif %}
+                </div>
+              </div>
+          </div>
+        {% else %}
+            {{ __("No recent top donator to display.") }}
+        {% endif %}
+    </div>
+</div>

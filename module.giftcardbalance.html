@@ -1,0 +1,27 @@
+<div class="panel panel-default module box-container" id="giftcardbalance">
+    <div class="panel-heading">
+        
+            <div class="mdi-badge"><i class="mdi mdi-card-text"></i></div><span>{{ module.header }}</span>
+    </div>
+    <div class="panel-body content" style="width:auto;float:none;">
+        <div class="giftcardbalance" style="text-align:center;">
+            <form action='#giftcardbalance' method='post'>
+                <div class="input-group">
+                    <input type="text" name="card_number" placeholder="Card Number" class="form-control" value="{{ search }}" />
+                    <div class="input-group-btn"><button class="btn btn-primary">{{ __("Check") }} <i class="fa fa-arrow-right"></i></button></div>
+                </div>
+               
+                {% if search %}
+                    <hr />
+                    {% if giftcard == false or giftcard.card_number == false %}
+                        <p class='alert alert-danger'>{{ __("No card found") }}</p>
+                    {% elseif giftcard.void == 1 %}
+                        <p class='alert alert-warning'>{{ __("This gift card has been marked as void") }}</p>
+                    {% else %}
+                         <p><strong>{{ __("Card balance:") }} {{ giftcard.remaining_balance }} {{ store.currency }}</strong></p>
+                    {% endif %}
+                {% endif %}
+                 
+        </div>
+    </div>
+</div>

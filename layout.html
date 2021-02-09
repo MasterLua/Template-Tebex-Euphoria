@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>{{ store.name }} | {{ __(page.title) }}</title>
+
+    <link href="/templates/209/css/style.min.css" rel="stylesheet">
+   
+    <link rel="shortcut icon" href="{{ store.favicon }}">
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        
+        _gaq.push(['_setAccount', 'UA-36735942-3']);
+        _gaq.push(['_trackPageview']);
+        
+        {% if store.googleAnalytics %}
+            _gaq.push(['b._setAccount', '{{ store.googleAnalytics }}']);
+            _gaq.push(['b._trackPageview']);
+        {% endif %}
+        
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+    
+    <style>{{ store.css|raw }}</style>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="https://cdn.materialdesignicons.com/3.5.95/css/materialdesignicons.min.css" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+    <script src="https://unpkg.com/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Teko:400,700' rel='stylesheet' type='text/css'>
+
+  </head>
+  
+      <script>
+        var home = 'https://google.ro';
+        var forum = 'https://google.ro';
+        var store = 'https://google.ro';
+        var bans = 'https://google.ro';
+        var vote = 'https://google.ro';
+    </script>
+    
+    <script>
+window.onload = function() {
+        link = document.getElementById('home');  link.href = home;
+        link = document.getElementById('forum');  link.href = forum;
+        link = document.getElementById('store');  link.href = store;
+        link = document.getElementById('bans');  link.href = bans;
+        link = document.getElementById('vote');  link.href = vote;
+}
+</script>
+  <body>
+
+
+
+      <div class="header" id="header">
+          <div class="header-part">
+              <div id="particles-js"></div>
+        <div class="euphoria-nav">
+        <div class="euphoria-menu">
+                        <div class="dd-bg" onclick="closeMobile()"></div>
+        <div class="modal" id="popup-modal" tabindex="-1" role="dialog"></div>
+                    <div class="dd-mobile">
+                        <li>   
+                            <a href="javascript:void(0)" onclick="openMobile()">
+                                <i class="mdi mdi-menu"></i><span> Menu</span>
+                            </a>
+                        </li>
+                    </div>
+        <ul id="euphoria-menu" class="">
+            <div class="dd-close">
+                <a href="javascript:void(0)" onclick="closeMobile()"><i class="mdi mdi-window-close"></i> close</a>
+            </div>
+            <li class="nav-item"><a class="nav-link" id="home"><i class="mdi mdi-home"></i> <span>Home</span></a></li>
+            <li class="nav-item"><a class="nav-link" id="forum"><i class="mdi mdi-comment-text-multiple"></i> <span>Forums</span></a></li>
+            <li class="nav-item hwr-glow"><a class="nav-store" id="store"><i class="mdi mdi-cart-arrow-right"></i> Store</a></li>
+            <li class="nav-item"><a class="nav-link" id="bans"><i class="mdi mdi-shield-off"></i> <span>Bans</span></a></li>
+            <li class="nav-item"><a class="nav-link" id="vote"><i class="mdi mdi-shield-check"></i> <span>Vote</span></a></li>
+        </ul></div>
+    </div>
+    <div class="header-container">
+       <div class="container">
+           
+           <div class="euphoria-count">
+       <div class="left ipCopy" data-clipboard-text="play.hypixel.net" onclick="serverjoin()">
+                    <i class="mdi mdi-minecraft"></i>
+                    <div class="players"> Players Online<span id="euphoria-mc"></span></div>
+                                   <small class="ipCopy">Click to Copy</small>
+</div>    
+        <div class="logo">
+            {% if store.logo %}
+                <a class="pulse infinite animated" href="/"><img src="{{ store.logo }}" /></a>
+            {% else %}
+                <span>{{ store.name }}</span>
+            {% endif %}
+        </div>
+        
+<div class="right">
+                    <i class="mdi mdi-discord"></i>         
+                    <div class="players"><a href="https://discord.gg" target="blank">
+                        <span id="euphoria-discord"></span> Members Online</div>
+                                       <small class="ipCopy">Join Our Discord</a></small>
+                                        </div>
+       </div>
+    </div></div></div>
+
+
+      </div> 
+        
+        
+    <div class="container" id="cyvers-container">  
+      <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">{{ store.name }}</a>
+          </div>
+
+          <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="{% if page.category == "index" %}active{% endif %}"><a href="/">{{ __("Home") }}</a></li>
+                {% for category in store.categories %}
+                  {% if category.subcategories|length > 0 %}
+                    <li class="dropdown {% if category.active %}active{% endif %}">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ category.name }} <i class="fa fa-caret-down"></i></a>
+                        <ul class="dropdown-menu">
+                          {% for subcategory in category.subcategories %}
+                            <li><a href="/category/{{ subcategory.id }}">{{ subcategory.name }}</a></li>
+                          {% endfor %}
+                        </ul>
+                  {% else %}
+                    <li class="{% if category.active %}active{% endif %}"><a href="/category/{{ category.id }}">{{ category.name }}</a></li>
+                  {% endif %}
+                {% endfor %}
+                {% for page in store.pages %}
+                    <li class="{% if page.active %}active{% endif %}"><a href="/{{ page.slug }}">{{ page.title }}</a></li>
+                {% endfor %}                
+                {% if basket.packages|length > 0 %} 
+                    <li class="visible-xs {% if page.category == "checkout" %}active{% endif %}"><a href="/checkout/basket">{{ __("Checkout") }}</a></li>
+                {% endif %}
+                {% if basket.username %} 
+                    <li class="visible-xs"><a href="/checkout/logout">{{ __("Logout") }}</a></li>
+                {% endif %}
+            </ul>
+          </div>
+        </div>
+               
+      </nav>  
+     		          <div class="notification">
+        {% if page.message.display %}
+            <div class="alert alert-{{ page.message.type}} alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                {{ page.message.text }}
+            </div>
+        {% endif %}  
+      </div>
+
+      {% block content %}{% endblock %}
+
+      {% if store.plan == "1" %}
+        <div class="advertisement">
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px;" data-ad-client="ca-pub-9830135219921132" data-ad-slot="7404819681"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+      {% endif %}
+</div>
+
+        <div class="bFooter">
+            <div class="cFooter container">
+	    <div class="footer-col">
+	        <h4><i class="mdi mdi-clipboard-play"></i>About Us</h4>
+	        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo."</p>
+	    </div>
+	  <div class="footer-img">
+	        <img src="https://i.imgur.com/HaCBWHv.png">
+	  </div>
+	  <div class="footer-col">
+	        <h4><i class="mdi mdi-star-box"></i>Visit Store</h4>
+	         <p>Your text about your store can be here!</p>
+	          <a href="#" class="footer-store hvr-rectangle-out">Visit Store</a>
+	 </div></div></div>
+	 <div class="aFooter">
+  		<div class="container">
+	<div class="cyvers-cp p-body-inner" id="mobile-hide">
+			<p>
+				© 2020 <b>YOURNAME</b> INC. ALL RIGHTS RESERVED..
+			</p>
+			<div class="f-right">
+				<a href="https://cyvers.com/"><img src="https://i.imgur.com/bKiNukw.png" alt="cyvers copyright"></a>
+			</div>
+		</div></div>
+  		</div></div>
+
+    
+    
+    <div class="modal" id="popup-modal" tabindex="-1" role="dialog"></div>
+    
+    {% if page.category == "checkout" %}
+      <script src="https://js.stripe.com/v2/"></script>
+    {% endif %}
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>  
+    <script src="/templates/209/js/bootstrap.min.js"></script>
+    <script src="/templates/209/js/skin.min.js"></script>
+    <script src="/templates/209/js/site.js"></script>
+    
+        <script>
+           $(function() {
+            CyversMC("play.hypixel.net", document.querySelector("#euphoria-mc"));
+            CyversDiscord("308240379247984650", document.querySelector("#euphoria-discord"));
+            
+        });
+</script>
+    
+    
+<a href="javascript:" id="return-to-top"><i class="fa fa-chevron-up"></i></a>
+
+
+<script>
+   function serverjoin()
+    {
+        swal({
+            title: "IP has been copied!",
+            text: "You can join the server by adding the IP to your server list!",
+            icon: "success",
+            button: "Join Now",
+        });
+    }
+
+    var clipboard = new ClipboardJS('.ipCopy');
+
+$(window).scroll(function() {
+    if ($(this).scrollTop() >= 50) { 
+        $('#return-to-top').fadeIn(200);
+    } else {
+        $('#return-to-top').fadeOut(200);
+    }
+});
+$('#return-to-top').click(function() {
+    $('body,html').animate({
+        scrollTop : 0
+    }, 500);
+});
+
+</script>
+
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        
+        _gaq.push(['_setAccount', 'UA-61297048-1']);
+        _gaq.push(['_trackPageview']);
+        
+        {% if store.googleAnalytics %}
+            _gaq.push(['b._setAccount', '{{ store.googleAnalytics }}']);
+            _gaq.push(['b._trackPageview']);
+        {% endif %}
+        
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    <script>
+        jQuery(function(){
+            var countdowns = $(".countdown-to");
+            countdowns.each(function(){
+               setInterval(function(ele) {
+                   timeLeft = parseInt(ele.attr("data-countdown"));
+                   if (timeLeft == 0) {
+                       ele.html("Time Expired!");
+                   } else {
+                   timeLeft--;
+                   ele.attr("data-countdown", timeLeft);
+                  var days = Math.floor(timeLeft / (60 * 60 * 24));
+                  var hours = Math.floor((timeLeft % (60 * 60 * 24)) / (60 * 60));
+                  var minutes = Math.floor((timeLeft % (60 * 60)) / (60));
+                  var seconds = Math.floor((timeLeft % 60));
+                  ele.html(days + "d " + hours + "h " + minutes + "m " + seconds + "s");
+                   }
+               }, 1000, jQuery(this));
+            });
+        });
+
+    </script>
+    
+<script>
+        function CyversMC(ip, element) {
+            fetch(`https://mc-api.net/v3/server/ping/${ip}`)
+            .then(res => res.json())
+            .then(data => element.innerHTML = data["players"]["online"])
+        }
+        
+                function CyversDiscord(id, element) {
+            $.get(`https://discordapp.com/api/guilds/${id}/embed.json`, function (data) {
+                element.innerHTML = data["presence_count"];
+            });
+        }
+</script>
+
+<script>
+                function openMobile() {
+                $(".dd-bg").addClass("active");
+                $(".euphoria-menu ul#euphoria-menu").addClass("open");
+            }
+            function closeMobile() {
+                $(".dd-bg").removeClass("active");
+                $(".euphoria-menu ul#euphoria-menu").removeClass("open");
+            }
+</script>
+
+<script>
+        particlesJS("particles-js", {
+            "particles": {
+                "number": {
+                    "value": 100,
+                    "density": {
+                        "enable": true,
+                        "value_area": 2000
+                    }
+                },
+                "color": {
+                    "value": "#dc3545"
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    },
+                    "polygon": {
+                        "nb_sides": 4
+                    },
+                    "image": {
+                        "src": "img/github.svg",
+                        "width": 100,
+                        "height": 100
+                    }
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": true,
+                    "anim": {
+                        "enable": false,
+                        "speed": 0.5,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 8,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                        "speed": 2,
+                        "size_min": 0,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": false,
+                    "distance": 500,
+                    "color": "#ffffff",
+                    "opacity": 0.4,
+                    "width": 2
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 2.8914764163227265,
+                    "direction": "top",
+                    "random": true,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                        "enable": false,
+                        "rotateX": 600,
+                        "rotateY": 1200
+                    }
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": false,
+                        "mode": "bubble"
+                    },
+                    "onclick": {
+                        "enable": false,
+                        "mode": "repulse"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 400,
+                        "line_linked": {
+                            "opacity": 0.5
+                        }
+                    },
+                    "bubble": {
+                        "distance": 400,
+                        "size": 4,
+                        "duration": 0.3,
+                        "opacity": 1,
+                        "speed": 3
+                    },
+                    "repulse": {
+                        "distance": 200,
+                        "duration": 0.4
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    },
+                    "remove": {
+                        "particles_nb": 2
+                    }
+                }
+            },
+            "retina_detect": true
+        });
+        var count_particles, stats, update;
+    </script>
+  </body>
+</html>
+
+
+
+
+
+

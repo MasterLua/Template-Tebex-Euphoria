@@ -1,0 +1,35 @@
+<div class="panel panel-default module box-container">
+      <div class="header" style="margin-top:0px;margin-bottom:0px;">
+              <div class="panel-heading">
+                  <div class="mdi-badge"><i class="mdi mdi-package-up"></i></div>{{ module.header }}</div>
+    </div>
+    <div class="panel-body content" style="width:auto;float:none;">
+        <div class="donation-goal" style="text-align:center;">
+            {% if module.communitygoal.image %}
+                <div class="image borderless">
+                    <img src="{{ module.communitygoal.image }}" style="width:190px; height:165px;" class="tooltip-help" />
+                </div>
+            {% endif %}    
+            <p>
+                {{ module.communitygoal.description|raw }}
+            </p>        
+            <p>
+                {% if module.displayAmount %}
+                    {{ module.total }} / {{ module.target }} {{ store.currency }} ({{ module.percentage }}%)
+    		    {% endif %}
+
+    		    {% if module.displayAmount == false %}
+    			    {{ module.percentage }}% {{ __("completed") }}
+    		    {% endif %} 
+            </p>
+            <div class="progress {% if module.bar.style == "striped" %} progress-striped {% endif %} {% if module.bar.animated %} active {% endif %}">
+                <div class="progress-bar bar" role="progressbar" style="width:{{ module.percentage }}%;"></div>
+            </div>
+            {% if module.communitygoal.repeatable == 1 %}
+                <hr />
+                <p>{{ __("Times Achieved:") }} {{ module.communitygoal.times_achieved }}</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+
+{% block content %}
+	<div class="body">
+		<div class="col-md-9">
+		      <div class="ads">
+		          <div class="announce-text"><i class="mdi mdi-comment-alert-outline"></i> Your text can be here.</div>
+		          <div class="currency">
+              <i class="mdi mdi-currency-usd"></i><button type="button" class="currency-button dropdown-toggle" data-toggle="dropdown">
+                {{ basket.currency }} <span class="fa fa-caret-down"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                {% for currency in store.currencies %}
+                    {% if currency.code in [store.currency, "AUD", "BRL", "CAD", "DKK", "EUR", "NOK", "NZD", "GBP", "SEK", "USD", "PLN"] %}
+                        <li {% if basket.currency == currency.code %}class="active"{% endif %}>
+                          <a href="?currency={{ currency.code }}">{{ currency.code }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+              </ul>
+            </div>
+        </div>
+			<div class="panel panel-default">
+				<div class="panel-heading">{{ __("Welcome") }}
+					<div class="basket cart">
+                {% if basket.packages|length > 0 %}
+          <button type="button" class="basket-button dropdown-toggle" data-toggle="dropdown"><i class="mdi mdi-cart"></i>Cart
+                    <span class="amount">{{ _p(":count", basket.packages|length, {'count' : basket.packages|length }) }}</span> <span class="fa fa-caret-down"></span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                        {% for package in basket.packages %}
+                            <li class="item">
+                            <div class="name">{{ package.name[:25] }}</div>
+                            <div class="price">{{ package.price|money }} <small>{{ basket.currency }}</small></div>
+                            <div class="remove"><a href="/checkout/packages/remove/{{ package.id }}"><span class="fa fa-times"</span></a></div>
+                            </li>
+                        {% endfor %}
+                        <li class="checkout">
+                          <div class="total"><b>{{ __("Total") }}:</b> {{ basket.price|money }} <small>{{ basket.currency }}</small></div>
+                          <div class="button"><a href="/checkout/basket" class="btn btn-success">{{ __("Checkout") }}</a></div>
+                        </li>
+                    </ul>
+                {% else %}
+                  <a href="/checkout/basket" class="basket-button"><i class="mdi mdi-cart"></i>Cart</a>
+                {% endif %}
+            </div>
+				<div class="panel-body">
+					<p>
+				  		{{ index.description|raw }}
+					</p>
+				</div>
+			</div>
+		</div>
+		</div>
+
+		<div class="col-md-3">
+            <div class="login">
+            {% if basket.username %} 
+              <div class="cyvers-icon"><img src="https://minotar.net/cube/{{ basket.ign }}/40.png"> </div>
+                    <div class="logged">
+                  <div id="player-name">Welcome, {{ basket.ign }}</div>
+                  <div class="cyvers-button">
+                  <a href="/checkout/logout" class="login-button out">{{ __("Logout") }}</a>
+                  <a href="/checkout/basket" class="basket-button"><i class="mdi mdi-cart"></i></a>
+                  </div></div>
+                   {% else %}
+                <a href="/login" class="login-button">{{ __("Login") }}</a>
+            {% endif %}
+            </div>
+			{{ modules|raw }}
+		</div>
+</div>
+{% endblock %}

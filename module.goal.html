@@ -1,0 +1,20 @@
+<div class="panel panel-default module">
+    <div class="panel-heading">
+        <div class="mdi-badge"><i class="mdi mdi-timer-sand"></i></div><span>{{ module.header }}</span></div>
+    <div class="panel-body">
+        <div class="donation-goal">
+            <p>
+                {% if module.displayAmount %}
+                    {{ module.total }} / {{ module.target }} {{ store.currency }} ({{ module.percentage }}%)
+    		    {% endif %}
+
+    		    {% if module.displayAmount == false %}
+    			    {{ module.percentage }}% {{ __("completed") }}
+    		    {% endif %} 
+            </p>
+            <div class="progress {% if module.bar.style == "striped" %} progress-striped {% endif %} {% if module.bar.animated %} active {% endif %}">
+                <div class="progress-bar" role="progressbar" style="width:{{ module.percentage }}%;"></div>
+            </div>
+        </div>
+    </div>
+</div>

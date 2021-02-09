@@ -1,0 +1,27 @@
+{% if module.display %}
+    <div class="panel panel-default module">
+        <div class="panel-heading">
+            <div class="pull-left">{{ module.header }}</div>
+            <div class="text-right">
+                {% if module.online %}
+                    <span class="label label-success">{{ __("Online") }}</span>
+                {% else %}
+                    <span class="label label-danger">{{ __("Offline") }}</span>
+                {% endif %}
+            </div>
+        </div>
+        <div class="panel-body">
+          <div class="server-status">
+            <h4>{{ module.ip }}{% if module.port != 25565 %}:{{ module.port }}{% endif %}</h4>
+            <p>
+                {% if module.online %}
+                  {{ module.players.online }} / {{ module.players.max }}
+                {% else %}
+                  0/0
+                {% endif %}
+                {{ __("players online.") }}
+            </p>
+          </div>
+        </div>
+      </div>
+{% endif %}
